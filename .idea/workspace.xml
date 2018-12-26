@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c72989-ebbf-4f08-9092-2cd27573e1bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/combat/resultapi/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/combat/resultapi/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combat/mail/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/combat/mail/main.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,13 +50,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="43758" />
+          <entry key="go" value="43762" />
           <entry key="html" value="69" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="43758" />
+          <entry key="Go" value="43762" />
           <entry key="HTML" value="69" />
         </counts>
       </usages-collector>
@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/combat/mail/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+            <state relative-caret-position="156">
+              <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
               <folding>
                 <element signature="e#14#47#0" expanded="true" />
               </folding>
@@ -213,7 +213,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545801650504" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545802354696" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
@@ -359,12 +359,12 @@
       <workItem from="1545288582417" duration="15369000" />
       <workItem from="1545702823949" duration="2013000" />
       <workItem from="1545719120072" duration="4246000" />
-      <workItem from="1545728402405" duration="11966000" />
+      <workItem from="1545728402405" duration="12577000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206756000" />
+    <option name="totallyTimeSpent" value="207367000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="828" y="26" width="1219" height="1007" extended-state="0" />
@@ -808,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/combat/mail/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="156">
+          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
           <folding>
             <element signature="e#14#47#0" expanded="true" />
           </folding>

@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	auth := smtp.PlainAuth("","654014730@qq.com","ndjvbkwxikfnbbic","smtp.qq.com")
+	auth := smtp.PlainAuth("","654014730@qq.com","xxxx","smtp.qq.com")
 	to := []string{"949104693@qq.com"}
 	nickname := "test"
 	user := "654014730@qq.com"
