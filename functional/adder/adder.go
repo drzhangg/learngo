@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
-func adder() func(i int) int {
-
+func addr() func(int) int {
 	sum := 0
+	
 	return func(v int) int {
 		sum += v
 		return sum
@@ -12,8 +12,8 @@ func adder() func(i int) int {
 }
 
 func main() {
-	a := adder()
+	a := addr()
 	for i := 0; i < 10; i++ {
-		fmt.Printf("0 + 1 + ... + %d = %d \n",i,a(i))
+		fmt.Printf("0 + 1 + ... + %d = %d\n",i,a(i))
 	}
 }
