@@ -33,11 +33,11 @@ func main() {
 
 	//将读取到的html文件写入本地
 	/*var d1 = []byte(all)
-
 	err = ioutil.WriteFile("crawler/crawler/demo.html",d1,0666)
 	if err != nil {
 		panic(err)
 	}*/
+
 
 	/*re := regexp.MustCompile(`window.__INITIAL_STATE__ = {(\w+)};`)
 	fmt.Println("re:",re)
