@@ -31,7 +31,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%s\n",all)
+	//fmt.Printf("%s\n",all)
 	printCityAll(all)
 }
 
