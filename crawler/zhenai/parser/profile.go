@@ -41,7 +41,7 @@ func ParseProfile(contents []byte) engine.ParseResult {
 	}
 	profile.Marriage = extractString(contents,marriageRe)
 
-	
+
 
 }
 
