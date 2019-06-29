@@ -10,15 +10,14 @@ func getNum(numChan chan int) {
 }
 
 func readChan(numChan chan int, resChan chan map[int]int, exitChan chan bool) {
-	for{
-		num,ok := <- numChan
+	for {
+		num, ok := <-numChan
 		if !ok {
 			break
-		}else {
-			m := map[int]int{num:(1 + num)*num /2}
-			resChan <- m
-
 		}
+		m := map[int]int{num: (1 + num) * num / 2}
+		resChan <- m
+
 	}
 	exitChan <- true
 
@@ -26,27 +25,25 @@ func readChan(numChan chan int, resChan chan map[int]int, exitChan chan bool) {
 
 func main() {
 
-	numChan := make(chan int,100)
-	resChan := make(chan map[int]int,100)
-	exitChan := make(chan bool,8)
+	numChan := make(chan int, 100)
+	resChan := make(chan map[int]int, 100)
+	exitChan := make(chan bool, 8)
 
 	go getNum(numChan)
 
 	for i := 0; i < 8; i++ {
-		go readChan(numChan,resChan,exitChan)
+		go readChan(numChan, resChan, exitChan)
 	}
 
 	go func() {
 		for i := 0; i < 8; i++ {
-			<- exitChan
+			<-exitChan
 		}
 		close(resChan)
 	}()
 
-
-
-	for{
-		v,ok := <- resChan
+	for {
+		v, ok := <-resChan
 		if !ok {
 			break
 		}
