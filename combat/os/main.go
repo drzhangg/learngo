@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	userFile := "main.go"
+	userFile := "message.go"
 	fl,err := os.Open(userFile)
 	if err != nil {
 		fmt.Println(err)

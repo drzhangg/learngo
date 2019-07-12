@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	b,err := ioutil.ReadFile("main.go")
+	b,err := ioutil.ReadFile("message.go")
 	if err != nil {
 		fmt.Println(err)
 	}

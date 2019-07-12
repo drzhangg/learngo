@@ -20,7 +20,7 @@ func newParseError(filename string, line int) error {
 
 func main() {
 	var e error
-	e = newParseError("main.go",1)
+	e = newParseError("message.go",1)
 
 	fmt.Println(e.Error())
 
