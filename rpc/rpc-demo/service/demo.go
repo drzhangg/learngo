@@ -6,6 +6,16 @@ import (
 	"net/rpc"
 )
 
+const HelloServiceName = "path/to/pkg.HelloService"
+
+type HelloServiceInterface = interface {
+	Hello(request string, reply *string) error
+}
+
+func RegisterHelloService(svc HelloServiceInterface) error {
+	return rpc.RegisterName(HelloServiceName, svc)
+}
+
 type HelloService struct {
 }
 
@@ -15,16 +25,16 @@ func (p *HelloService) Hello(request string, reply *string) error {
 }
 
 func main() {
-	rpc.RegisterName("HelloService",new(HelloService))
+	rpc.RegisterName("HelloService", new(HelloService))
 
-	listen,err := net.Listen("tcp",":1234")
+	listen, err := net.Listen("tcp", ":1234")
 	if err != nil {
-		log.Fatal("ListenTCP error :",err)
+		log.Fatal("ListenTCP error :", err)
 	}
 
-	conn,err := listen.Accept()
+	conn, err := listen.Accept()
 	if err != nil {
-		log.Fatal("Accept error:",err)
+		log.Fatal("Accept error:", err)
 	}
 	rpc.ServeConn(conn)
 }
