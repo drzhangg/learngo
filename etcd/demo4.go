@@ -13,6 +13,7 @@ func main() {
 	client, err := clientv3.New(conf)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	//创建租约
@@ -22,6 +23,7 @@ func main() {
 	leaseGrant, err := lease.Grant(context.TODO(), 5)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	//获取kv
@@ -31,6 +33,7 @@ func main() {
 	leaseKeepResp, err := lease.KeepAlive(context.TODO(), leaseGrant.ID)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	go func() {
@@ -49,6 +52,7 @@ func main() {
 	putResp, err := kv.Put(context.TODO(), "/test/key4", "hello", clientv3.WithLease(leaseGrant.ID))
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 	fmt.Println("写入成功：", putResp.Header.Revision)
 
