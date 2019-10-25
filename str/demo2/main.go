@@ -17,4 +17,10 @@ func main() {
 
 
 	fmt.Println(sss)
+
+
+	hour := time.Now().Format("15")
+	min := time.Now().Format("04")
+	second := time.Now().Format("05")
+	fmt.Println("now：",hour+":" + min+":"+second)
 }
