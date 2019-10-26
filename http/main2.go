@@ -19,8 +19,9 @@ func main() {
 		nonce     string
 		signature string
 	)
-	//https://dev.bjt.beijing.gov.cn/ebus/gssdahan/jimp/qixiangju/interfaces/ + forecast.do?area=101010100
-	url = "https://dev.bjt.beijing.gov.cn/ebus/gssdahan/jimp/qixiangju/interfaces/quality.do?area=101010100"
+
+	//c.Request.SetRequestURI(url)
+
 	paasid = "gssdahan"
 	token = "M6tQkaMGqxlUUZZkN72Q99ToW0THwicU"
 	nonce = "123456789abcdefg"
@@ -34,7 +35,7 @@ func main() {
 	if err != nil {
 		fmt.Println("err----", err)
 	}
-	fmt.Println("request---",request)
+	fmt.Println("request---", request)
 
 	request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	request.Header.Set("paasid", paasid)
@@ -42,31 +43,20 @@ func main() {
 	request.Header.Set("signature", signature)
 	request.Header.Set("nonce", nonce)
 
-	//did := "9v3ee3iZnx"
-	//sid := "eUH9zxGnHI/jkdKVDUHs+A=="
-	//request.Header.Set("x-tif-did",did)
-	//request.Header.Set("x-tif-sid",sid)
-
-	//fmt.Println("paasid", paasid)
-	//fmt.Println("timestamp", timestamp)
-	//fmt.Println("signature", signature)
-	//fmt.Println("nonce", nonce)
-
+	did := "9v3ee3iZnx"
+	sid := "jeyGw9Gv/Y6hMX86woscnQ=="
+	request.Header.Set("x-tif-did",did)
+	request.Header.Set("x-tif-sid",sid)
 
 	client := &http.Client{}
-	resp,err := client.Do(request)
+	resp, err := client.Do(request)
 	if err != nil {
 		fmt.Println("err2----", err)
 	}
 	defer resp.Body.Close()
-	fmt.Println("resp",resp)
+	fmt.Println("resp", resp)
 
-	//s,err := httputil.DumpResponse(resp,true)
-	//if err != nil {
-	//	panic(err)
-	//}
-
-	body,err :=ioutil.ReadAll(resp.Body)
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("err3----", err)
 	}
