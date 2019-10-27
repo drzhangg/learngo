@@ -1,6 +1,8 @@
 package main
 
 import (
+	"brick/client"
+	"brick/dispatch"
 	"bytes"
 	"crypto/sha256"
 	"encoding/binary"
@@ -85,25 +87,23 @@ func NewBlockChain() *BlockChain {
 
 func (bc *BlockChain) AddBlock(data string) {
 	//防止区块越界
-	if len(bc.blocks) <= 0{
+	if len(bc.blocks) <= 0 {
 		os.Exit(1)
 	}
 	lastBlock := bc.blocks[len(bc.blocks)-1]
-	block := NewBlock(data,lastBlock.Hash)
-	bc.blocks = append(bc.blocks,block)
+	block := NewBlock(data, lastBlock.Hash)
+	bc.blocks = append(bc.blocks, block)
 }
-
-
 
 func main() {
 
 	//实例化一个区块链
-	bc :=NewBlockChain()
+	bc := NewBlockChain()
 
 	bc.AddBlock("测试第一个BTC")
 	bc.AddBlock("测试第一个EOS")
 
-	for i,block := range bc.blocks{
+	for i, block := range bc.blocks {
 		fmt.Println("=========block num:", i)
 		fmt.Println("data", string(block.Data))
 		fmt.Println("Version:", block.Version)
@@ -112,4 +112,12 @@ func main() {
 		fmt.Printf("MerkeRoot:%x\n", block.MerkeRoot)
 		fmt.Printf("None:%d\n", block.Nonce)
 	}
+
+	disAdrr := dispatch.MakeDispatchURL("tif","","")
+	addr,err := client.NewAddressing(disAdrr)
+	if err!=nil{
+		fmt.Println(err)
+	}
+	fmt.Println("addr-------",addr)
+
 }

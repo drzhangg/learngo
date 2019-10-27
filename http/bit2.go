@@ -12,7 +12,6 @@ import (
 
 func main() {
 
-	url := "https://dev.bjt.beijing.gov.cn/ebus/gssdahan/jimp/qixiangju/interfaces/forecast.do?area=101010100"
 
 	paasid := "gssdahan"
 	token := "M6tQkaMGqxlUUZZkN72Q99ToW0THwicU"
@@ -34,4 +33,5 @@ func main() {
 	resp, _ := client.Do(request)
 	data,_ := ioutil.ReadAll(resp.Body)
 	fmt.Println(string(data))
+
 }
