@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-	var fileDatas []File
 	var fileData File
 	fff := excelize.NewFile()
 	files, _ := ioutil.ReadDir("./excel/file/")
@@ -22,41 +21,26 @@ func main() {
 		if err != nil {
 			fmt.Println("unmarshal failed,", err)
 		}
-		fileDatas = append(fileDatas, fileData)
-		//fmt.Println(reflect.TypeOf(k1).String())
-		fmt.Println(len(fileDatas))
-		//fmt.Println(k1)
 
 		for k, v := range fileData.Item {
-			//fmt.Println(len(fileData.Item))
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "A1", "接口名称")
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "B1", "接口url")
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "C1", "接口请求方式")
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "D1", "接口调用参数")
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "A"+strconv.Itoa(k+2), v.Name)
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "B"+strconv.Itoa(k+2), v.Request.Url.Raw)
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "C"+strconv.Itoa(k+2), v.Request.Method)
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
-			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
+			fff.SetCellValue("Sheet1", "A1", "接口名称")
+			fff.SetCellValue("Sheet1", "B1", "接口url")
+			fff.SetCellValue("Sheet1", "C1", "接口请求方式")
+			fff.SetCellValue("Sheet1", "D1", "接口调用参数")
+			fff.SetCellValue("Sheet1", "A"+strconv.Itoa(k+2), v.Name)
+			fff.SetCellValue("Sheet1", "B"+strconv.Itoa(k+2), v.Request.Url.Raw)
+			fff.SetCellValue("Sheet1", "C"+strconv.Itoa(k+2), v.Request.Method)
+			fff.SetCellValue("Sheet1", "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
+			fff.SetCellValue("Sheet1", "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
+			
 			//excelName := `./book1.xlsx`
-			excelName := fmt.Sprintf("./%s.xlsx",f.Name())
+			excelName := fmt.Sprintf("./excel/excelfile/%s.xlsx", f.Name())
 			err = fff.SaveAs(excelName)
 			if err != nil {
 				fmt.Println(err)
 			}
 		}
 	}
-}
-
-func removeDup(a []int64) []int64 {
-	i := 0
-	for j := 1; j < len(a); j++ {
-		if a[i] != a[j] {
-			i++
-			a[i] = a[j]
-		}
-	}
-	return a[:i+1]
 }
 
 type File struct {
