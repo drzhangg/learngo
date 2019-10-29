@@ -8,6 +8,57 @@ import (
 	"strconv"
 )
 
+func main() {
+	var fileDatas []File
+	var fileData File
+	fff := excelize.NewFile()
+	files, _ := ioutil.ReadDir("./excel/file/")
+	for _, f := range files {
+		bytes, err := ioutil.ReadFile("./excel/file/" + f.Name())
+		if err != nil {
+			fmt.Println("open file err,", err)
+		}
+		err = json.Unmarshal(bytes, &fileData)
+		if err != nil {
+			fmt.Println("unmarshal failed,", err)
+		}
+		fileDatas = append(fileDatas, fileData)
+		//fmt.Println(reflect.TypeOf(k1).String())
+		fmt.Println(len(fileDatas))
+		//fmt.Println(k1)
+
+		for k, v := range fileData.Item {
+			//fmt.Println(len(fileData.Item))
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "A1", "接口名称")
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "B1", "接口url")
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "C1", "接口请求方式")
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "D1", "接口调用参数")
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "A"+strconv.Itoa(k+2), v.Name)
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "B"+strconv.Itoa(k+2), v.Request.Url.Raw)
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "C"+strconv.Itoa(k+2), v.Request.Method)
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
+			fff.SetCellValue("Sheet"+strconv.Itoa(len(fileDatas)), "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
+			//excelName := `./book1.xlsx`
+			excelName := fmt.Sprintf("./%s.xlsx",f.Name())
+			err = fff.SaveAs(excelName)
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+	}
+}
+
+func removeDup(a []int64) []int64 {
+	i := 0
+	for j := 1; j < len(a); j++ {
+		if a[i] != a[j] {
+			i++
+			a[i] = a[j]
+		}
+	}
+	return a[:i+1]
+}
+
 type File struct {
 	Item []Date `json:"item"`
 }
@@ -38,56 +89,4 @@ type Body struct {
 
 type Url struct {
 	Raw string `json:"raw"`
-}
-
-func main() {
-
-	var fileData File
-	fff := excelize.NewFile()
-	files, _ := ioutil.ReadDir("./excel/file/")
-	for _, f := range files {
-		//fmt.Println(f.Name())
-		bytes, err := ioutil.ReadFile("./excel/file/" + f.Name())
-		if err != nil {
-			fmt.Println("open file err,", err)
-		}
-
-		//fmt.Println(string(bytes))
-
-		err = json.Unmarshal(bytes, &fileData)
-		if err != nil {
-			fmt.Println("unmarshal failed,", err)
-		}
-
-	}
-
-	//fmt.Println("waimian----",fileData.Item)
-	//单个接口
-
-	for k, v := range fileData.Item {
-		fmt.Println(k, v)
-		var datas = []Date{}
-		datas = append(datas, v)
-
-		for k1, v1 := range datas {
-			//统一获取异常类型
-			//106.52.166.84/api/r/businesdetailsvr/GetAbnTypeData
-			//POST
-			//v.Request.Body.Raw
-			fff.SetCellValue("Sheet1", "A1", "接口名称")
-			fff.SetCellValue("Sheet1", "B1", "接口url")
-			fff.SetCellValue("Sheet1", "C1", "接口请求方式")
-			fff.SetCellValue("Sheet1", "D1", "接口调用参数")
-			fff.SetCellValue("Sheet1", "A"+strconv.Itoa(k1+2), v1.Name)
-			fff.SetCellValue("Sheet1", "B"+strconv.Itoa(k1+2), v1.Request.Url.Raw)
-			fff.SetCellValue("Sheet1", "C"+strconv.Itoa(k1+2), v1.Request.Method)
-			fff.SetCellValue("Sheet1", "D"+strconv.Itoa(k1+2), v1.Request.Body.Raw)
-		}
-
-	}
-
-	err := fff.SaveAs("./Book1.xlsx")
-	if err != nil {
-		fmt.Println(err)
-	}
 }
