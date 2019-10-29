@@ -32,7 +32,7 @@ func main() {
 			fff.SetCellValue("Sheet1", "C"+strconv.Itoa(k+2), v.Request.Method)
 			fff.SetCellValue("Sheet1", "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
 			fff.SetCellValue("Sheet1", "D"+strconv.Itoa(k+2), v.Request.Body.Raw)
-			
+
 			//excelName := `./book1.xlsx`
 			excelName := fmt.Sprintf("./excel/excelfile/%s.xlsx", f.Name())
 			err = fff.SaveAs(excelName)
