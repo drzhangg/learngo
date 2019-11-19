@@ -34,11 +34,13 @@ func main() {
 		fmt.Println(subTime)
 
 	} else if now.String() > four.String() && now.String() < last.String() {
-		h, _ := time.ParseDuration("1h")
-		h1 := now.Add(h * 8)
-		subTime = last.Sub(h1)
-		fmt.Println(4)
-		fmt.Println(subTime)
+
+		//12点之前请求的，过期时间设置为23:59:59减去当前时间+8h
+		ss := last.Sub(now)
+		fmt.Println(ss)
+		s2, _ := time.ParseDuration("1h")
+		fmt.Println("-----", ss+s2*8)
+
 
 	}
 }
