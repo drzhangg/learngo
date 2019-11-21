@@ -77,6 +77,77 @@ func Batch(index string, type_ string, datas ...interface{}) {
 
 }
 
+
+//获取指定id的文档
+func GetDoc(index, id string) []byte {
+	temp := client.Get().Index(index).Id(id)
+	get, err := temp.Do(context.TODO())
+	if err != nil {
+		panic(err)
+	}
+
+	if get.Found {
+		fmt.Printf("Got document %s in version %d from index %s, type %s\n", get.Id, get.Version, get.Index, get.Type)
+	}
+
+	source,err := get.Source.MarshalJSON()
+	if err != nil {
+		fmt.Printf("byte convert string failed, err: %v", err)
+	}
+	return source
+}
+
+func TermQuery(index, type_, fileName, fileValue string) *elastic.SearchResult {
+	query := elastic.NewTermQuery(fileName,fileValue)
+	searchResult, err := client.Search().Index(index).Type(type_).Query(query).From(0).Size(10).Pretty(true).Do(context.TODO())
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("query cost %d millisecond.\n", searchResult.TookInMillis)
+
+	return searchResult
+}
+
+
+
+func Search(index, type_ string) *elastic.SearchResult {
+	boolQuery := elastic.NewBoolQuery()
+	boolQuery.Must(elastic.NewMatchQuery("user", "Jame10"))
+	boolQuery.Filter(elastic.NewRangeQuery("age").Gt("30"))
+	searchResult, err := client.Search(index).
+		Type(type_).Query(boolQuery).Pretty(true).Do(context.Background())
+	if err != nil {
+		panic(err)
+	}
+
+	return searchResult
+}
+
+func AggsSearch(index, type_ string) {
+
+	minAgg := elastic.NewMinAggregation().Field("age")
+	rangeAgg := elastic.NewRangeAggregation().Field("age").AddRange(0,30).AddRange(30,60).Gt(60)
+
+
+	build := client.Search(index).Type(type_).Pretty(true)
+
+	minResult, err := build.Aggregation("minAgg", minAgg).Do(context.Background())
+	rangeResult, err := build.Aggregation("rangeAgg", rangeAgg).Do(context.Background())
+	if err != nil {
+		panic(err)
+	}
+
+	minAggRes, _ := minResult.Aggregations.Min("minAgg")
+	fmt.Printf("min: %v\n", *minAggRes.Value)
+
+	rangeAggRes, _ := rangeResult.Aggregations.Range("rangeAgg")
+	for _, item := range rangeAggRes.Buckets {
+		fmt.Printf("key: %s, value: %v\n", item.Key, item.DocCount)
+	}
+
+}
+
+
 func main() {
 
 }
