@@ -13,7 +13,7 @@ type Test struct {
 
 func main() {
 	var yamls Test
-	byes, err := ioutil.ReadFile("demo1.yaml")
+	byes, err := ioutil.ReadFile("server.yaml")
 	if err != nil {
 		fmt.Println(err)
 	}

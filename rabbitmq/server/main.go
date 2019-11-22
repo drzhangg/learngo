@@ -27,7 +27,10 @@ func failOnError(err error, msg string) {
 }
 
 func main() {
-
+	bodyMsg := bodyForm(os.Args)
+	//调用发布消息函数
+	publish(uri,exchangeName,queueName,bodyMsg)
+	log.Printf("published %dB OK", len(bodyMsg))
 }
 
 func bodyForm(args []string) string {
