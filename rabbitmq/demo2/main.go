@@ -56,3 +56,16 @@ func (r *RabbitMQ) mqConnect() {
 	r.connection = mqConn
 	r.channel = mqChan
 }
+
+//关闭rabbitMQ连接
+func (r *RabbitMQ) mqClose() {
+	//先关闭管道，再关闭连接
+	err := r.channel.Close()
+	if err != nil {
+		fmt.Printf("MQ管道关闭失败:%s \n", err)
+	}
+	err = r.connection.Close()
+	if err != nil {
+		fmt.Printf("MQ连接关闭失败:%s \n", err)
+	}
+}
