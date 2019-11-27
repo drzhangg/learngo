@@ -15,4 +15,6 @@ func main() {
 	fmt.Println(ss)
 	fmt.Println(s)
 	fmt.Println(ss + 999000)
+
+	fmt.Println(4/0)
 }
